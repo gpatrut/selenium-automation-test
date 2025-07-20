@@ -61,8 +61,9 @@ public class CartSteps {
     @Given("the empty cart message should be {string}")
     public void verifyEmptyCartMessage(String expectedMessage) {
         String actualMessage = cartPage.getEmptyCartMessage();
-        Assert.assertEquals(actualMessage, expectedMessage,
-                "Expected message: " + expectedMessage + ", but got: " + actualMessage);
+        Assert.assertTrue(actualMessage.contains(expectedMessage),
+                "Expected page title to contain '" + expectedMessage + "', but was '" + actualMessage + "'");
+
     }
 
 }

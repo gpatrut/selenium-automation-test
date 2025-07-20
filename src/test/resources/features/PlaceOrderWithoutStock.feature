@@ -1,7 +1,5 @@
 Feature: Place order without success
 
-
-#    @mobile
   @feature
   Scenario Outline: User place order with a product out of stock or not enough stock
     Given User opens the "home" page
@@ -19,7 +17,6 @@ Feature: Place order without success
       | Fusion Backpack       | 3   | The requested qty is not available                |
       | Fusion Backpack       | 1.5 | You cannot use decimal quantity for this product. |
 
-  @regression
     @feature
   Scenario Outline: User place order with qty less than 1
     Given User opens the "home" page

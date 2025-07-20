@@ -21,6 +21,7 @@ public class CommonPage extends BasePage {
     }
 
     public void checkH1PageTitle(String expectedTitle) {
+        removeAds();
         By pageTitleLocator = By.xpath(String.format(h1TitlePage, expectedTitle));
         WebElement element = waitForVisibility(pageTitleLocator);
         String actualTitle = element.getText().trim();

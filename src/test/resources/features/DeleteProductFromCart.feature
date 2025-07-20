@@ -1,6 +1,5 @@
 Feature: Delete product from cart
 
-#  @regression
   @feature
   Scenario: User deletes the product from cart
     Given User opens the "home" page

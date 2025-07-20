@@ -37,7 +37,7 @@ public class CartPage extends BasePage {
     }
 
     public void clickViewAndEditCart() {
-        waitForTheButtonToBeClickable(clickViewAndEditCart);
+        closeAdsIfExistsAndClick(clickViewAndEditCart);
     }
 
     public void emptyMiniCartMessage(String message) {

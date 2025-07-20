@@ -65,7 +65,7 @@ Feature: Add product to cart and place an order
     Then the title of the page is "Thank you for your purchase!"
 
   @feature
-  Scenario: User places an order without an account
+  Scenario: User place an order and change the quantity of the product
     Given User opens the "home" page
     When user accepts cookies terms
     And user opens the product page "Hero Hoodie"
@@ -100,3 +100,29 @@ Feature: Add product to cart and place an order
     When user clicks on "Place Order" button
     Then the title of the page is "Thank you for your purchase!"
 
+    #for mobile only
+  @feature @mobile @regression
+  Scenario: User places an order without an account
+    Given User opens the "home" page
+    When user accepts cookies terms
+    And user opens the product page "Hero Hoodie"
+    Then user selects size "XS", color "Green" qty "1"
+    When user click on Add to cart button
+    Then user checks the successful message contains "You added Hero Hoodie"
+    And the value in the mini-cart was updated at 1
+    When user navigates to cart
+    And user click on Proceed to checkout button
+    And fills out the information for the shipping address
+      | email          | first name | last name | street address | city      | state  | zipcode    | phone number | shippingMethod |
+      | test@email.com | FirstName  | LastName  | Abc 123        | Timisoara | Alaska | 12345-6789 | 012345688    | Fixed          |
+    Then user clicks on "Next" button
+    And the page title is "Payment Method"
+    And check the address summary on checkout page
+      | FirstName LastName           |
+      | Abc 123                      |
+      | Timisoara, Alaska 12345-6789 |
+      | United States                |
+      | 012345688                    |
+    And the estimated total value is "$59.00"
+    When user clicks on "Place Order" button
+    Then the title of the page is "Thank you for your purchase!"

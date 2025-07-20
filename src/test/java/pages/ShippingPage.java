@@ -25,7 +25,9 @@ public class ShippingPage extends BasePage {
         waitForVisibility(By.name("street[0]")).sendKeys(address.get("street address"));
         waitForVisibility(By.name("city")).sendKeys(address.get("city"));
 
-        driver.findElement(By.name("region_id")).click();
+        By regionField = By.name("region_id");
+        closeAdsIfExistsAndClick(regionField);
+
         clickOptionByDataTitle(address.get("state"));
         waitForVisibility(By.name("postcode")).sendKeys(address.get("zipcode"));
         waitForVisibility(By.name("telephone")).sendKeys(address.get("phone number"));
@@ -40,6 +42,7 @@ public class ShippingPage extends BasePage {
     }
 
     public void selectTheShippingMethod(String pickShippingMethod) {
+        removeAds();
         By shippingMethodLocator = By.xpath(String.format(shippingMethod, pickShippingMethod));
         driver.findElement(shippingMethodLocator).click();
     }

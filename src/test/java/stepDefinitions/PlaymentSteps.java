@@ -21,4 +21,9 @@ public class PlaymentSteps {
         paymentPage.verifyOrderSummary(expectedValues);
     }
 
+    @Given("the estimated total value is {string}")
+    public void theEstimatedTotalValueIs(String expectedValue) {
+        paymentPage.verifyEstimatedTotalValue(expectedValue);
+    }
+
 }

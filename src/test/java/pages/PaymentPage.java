@@ -38,4 +38,9 @@ public class PaymentPage extends BasePage {
         Assert.assertEquals(shippingMethod, expectedValues.get("Shipping Method"), "Shipping Method mismatch");
         Assert.assertEquals(total, expectedValues.get("Order Total"), "Order Total mismatch");
     }
+
+    public void verifyEstimatedTotalValue (String expectedValue) {
+        String estimatedTotalValue = driver.findElement(By.cssSelector("span.estimated-price")).getText();
+        Assert.assertEquals(estimatedTotalValue, expectedValue, "Expected value is " + expectedValue + " and actual value is " + estimatedTotalValue);
+    }
 }
