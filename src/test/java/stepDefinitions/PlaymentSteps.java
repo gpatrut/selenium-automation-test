@@ -1,0 +1,24 @@
+package stepDefinitions;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
+import pages.PaymentPage;
+
+import java.util.List;
+import java.util.Map;
+
+public class PlaymentSteps {
+    PaymentPage paymentPage = new PaymentPage();
+
+    @Given("check the address summary on checkout page")
+    public void verifyAddressSummary(DataTable dataTable) {
+        List<String> expectedLines = dataTable.asList();
+        paymentPage.verifyAddressSummary(expectedLines); // move logic to page class
+    }
+    @Given("check the order summary on checkout page")
+    public void verifyOrderSummary(DataTable dataTable) {
+        Map<String, String> expectedValues = dataTable.asMap(String.class, String.class);
+        paymentPage.verifyOrderSummary(expectedValues);
+    }
+
+}
