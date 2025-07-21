@@ -10,6 +10,6 @@ Feature: Delete product from cart
     Then user checks the successful message contains "You added Hero Hoodie"
     And the value in the mini-cart was updated at 1
     When user navigates to cart
-   And user delete the product from cart
-    Then the title of the page is "Shopping Cart"
-  And the empty cart message should be "You have no items in your  shopping  cart."
+    And user delete the product from cart
+    Then the title of the page contains "Shopping Cart"
+    And the empty cart message should be "You have no items in your shopping cart."

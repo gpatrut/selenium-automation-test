@@ -13,7 +13,7 @@ public class PlaymentSteps {
     @Given("check the address summary on checkout page")
     public void verifyAddressSummary(DataTable dataTable) {
         List<String> expectedLines = dataTable.asList();
-        paymentPage.verifyAddressSummary(expectedLines); // move logic to page class
+        paymentPage.verifyAddressSummary(expectedLines);
     }
     @Given("check the order summary on checkout page")
     public void verifyOrderSummary(DataTable dataTable) {

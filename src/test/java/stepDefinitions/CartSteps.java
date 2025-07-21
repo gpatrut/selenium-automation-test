@@ -17,13 +17,9 @@ public class CartSteps {
     }
 
     @Given("user click on Proceed to checkout button")
+    @Given("user click on Proceed to checkout mini cart button")
     public void userClickOnProceedToCheckoutButton() {
         cartPage.checkOutButton();
-    }
-
-    @Given("user click on Proceed to checkout mini cart button")
-    public void userClickOnProceedToCheckoutFromMiniCartButton() {
-        cartPage.checkOutMiniCartButton();
     }
 
     @Given("user clicks on cart icon")
@@ -64,6 +60,11 @@ public class CartSteps {
         Assert.assertTrue(actualMessage.contains(expectedMessage),
                 "Expected page title to contain '" + expectedMessage + "', but was '" + actualMessage + "'");
 
+    }
+
+    @Given("the product {string} should be visible in the cart")
+    public void productShouldBeVisibleInCart(String expectedProductName) {
+        cartPage.verifyProductInCart(expectedProductName);
     }
 
 }

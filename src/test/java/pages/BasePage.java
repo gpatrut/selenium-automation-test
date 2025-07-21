@@ -18,24 +18,34 @@ public class BasePage {
     }
 
     protected void closeAdsIfExistsAndClick(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement el = wait.until(ExpectedConditions.elementToBeClickable(locator));
-
         try {
             removeAds();
+
+            WebElement el = wait.until(ExpectedConditions.elementToBeClickable(locator));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", el);
             el.click();
-        } catch (ElementClickInterceptedException e) {
+        } catch (ElementClickInterceptedException | TimeoutException e) {
+            System.out.println("Retry after removing ad overlays...");
+
             removeAds();
-            el = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+            WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", el);
-            el.click();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el); // JS fallback
         }
     }
 
+
     protected void removeAds() {
         ((JavascriptExecutor) driver).executeScript(
-                "document.querySelectorAll('iframe[id^=\"aswift\"], iframe[src*=\"doubleclick\"], iframe[src*=\"googleads\"], iframe[title=\"Advertisement\"]').forEach(el => el.remove());"
+                "document.querySelectorAll(" +
+                        "'iframe[id^=\"aswift\"], " +
+                        "iframe[src*=\"doubleclick\"], " +
+                        "iframe[src*=\"googleads\"], " +
+                        "iframe[title=\"Advertisement\"], " +
+                        "div[id^=\"aswift\"], " +
+                        "div[id*=\"google\"]'" +
+                        ").forEach(el => el.remove());"
         );
     }
 

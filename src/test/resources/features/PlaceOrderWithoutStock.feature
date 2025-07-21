@@ -17,7 +17,7 @@ Feature: Place order without success
       | Fusion Backpack       | 3   | The requested qty is not available                |
       | Fusion Backpack       | 1.5 | You cannot use decimal quantity for this product. |
 
-    @feature
+  @feature
   Scenario Outline: User place order with qty less than 1
     Given User opens the "home" page
     When user accepts cookies terms

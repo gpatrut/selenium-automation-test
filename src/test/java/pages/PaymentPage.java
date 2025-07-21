@@ -23,8 +23,7 @@ public class PaymentPage extends BasePage {
         actualLines.forEach(System.out::println);
 
         Assert.assertEquals(actualLines, expectedLines,
-                "Displayed address summary does not match expected lines.");
-
+                "Displayed address summary " + actualLines + " does not match expected lines." + expectedLines);
     }
 
     public void verifyOrderSummary(Map<String, String> expectedValues) {

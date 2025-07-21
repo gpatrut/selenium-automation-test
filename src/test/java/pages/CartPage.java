@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class CartPage extends BasePage {
@@ -11,13 +12,13 @@ public class CartPage extends BasePage {
     protected By checkCartIconCounter = By.cssSelector("span.counter-number");
     protected By clickCartIcon = By.cssSelector("a.action.showcart");
     protected By clickViewAndEditCart = By.cssSelector("a.action.viewcart");
-    protected By checkOutButton = By.cssSelector("button[title='Proceed to Checkout'] span");
-    protected By checkOutButtonMiniCart = By.cssSelector("button[title='Proceed to Checkout']");
+    protected By checkOutButton = By.cssSelector("button[title='Proceed to Checkout']");
     protected By emptyMiniCartMessage = By.cssSelector("#minicart-content-wrapper strong.subtitle.empty");
     protected By updateCartButton = By.cssSelector("button[title='Update Shopping Cart'] span");
     protected By cartQuantityInput = By.cssSelector("input[title='Qty']");
     protected By deleteButtonLocator = By.cssSelector("a.action-delete[title='Remove item']");
     protected By emptyCartMsgLocator = By.xpath("//div[@class='cart-empty']/p[1]");
+    protected By productsNameLocator = By.xpath("//strong[@class='product-item-name']/a");
 
     public void checkCartIconCounter(Integer expectedCounterValue) {
         Integer actualCounterValue = Integer.valueOf(driver.findElement(checkCartIconCounter).getText().trim());
@@ -26,10 +27,6 @@ public class CartPage extends BasePage {
 
     public void checkOutButton() {
         closeAdsIfExistsAndClick(checkOutButton);
-    }
-
-    public void checkOutMiniCartButton() {
-        closeAdsIfExistsAndClick(checkOutButtonMiniCart);
     }
 
     public void clickCartIcon() {
@@ -74,7 +71,17 @@ public class CartPage extends BasePage {
     }
 
     public String getEmptyCartMessage() {
-        return waitForVisibility(emptyCartMsgLocator).getText().trim();
+        removeAds();
+        String emptyCartMessage =  waitForVisibility(emptyCartMsgLocator).getText().trim();
+        return emptyCartMessage.replaceAll("\\s{2,}", " ");
+    }
 
+    public void verifyProductInCart(String expectedProductName) {
+        List<WebElement> productElements = driver.findElements(productsNameLocator);
+
+        boolean productFound = productElements.stream()
+                .anyMatch(el -> el.getText().trim().equalsIgnoreCase(expectedProductName));
+
+        Assert.assertTrue(productFound, "Product '" + expectedProductName + "' was not found in the cart.");
     }
 }
