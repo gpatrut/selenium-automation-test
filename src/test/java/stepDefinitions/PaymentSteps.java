@@ -7,7 +7,7 @@ import pages.PaymentPage;
 import java.util.List;
 import java.util.Map;
 
-public class PlaymentSteps {
+public class PaymentSteps {
     PaymentPage paymentPage = new PaymentPage();
 
     @Given("check the address summary on checkout page")
