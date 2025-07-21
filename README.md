@@ -20,6 +20,7 @@ Features
 
 - Tests placing an order and completing the shipping process
 - Page Object Model (POM) structure
+- Cucumber report found in /target/cucumber-reports
 
 ## Run tests 
  - all test run in cmd : mvn clean test
