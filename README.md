@@ -18,7 +18,7 @@ Tech Stack
 Features
 --------
 
-- Place order and finish the shipping 
+- Tests placing an order and completing the shipping process
 - Page Object Model (POM) structure
 
 ## Run tests 
